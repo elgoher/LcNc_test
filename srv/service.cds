@@ -1,7 +1,22 @@
 using { MyProject as my } from '../db/schema';
 
-@path: 'service/MyProject'
-@requires: 'authenticated-user'
-service MyProjectService {
+using MyProject from '../db/schema';
 
+service LcNc_testService
+{
 }
+
+@path : 'service/MyProject'
+service MyProjectService
+{
+    entity Capex as
+        projection on my.capex;
+
+    entity CapexItems as
+        projection on my.capexitems;
+}
+
+annotate MyProjectService with @requires :
+[
+    'authenticated-user'
+];
